@@ -1,0 +1,49 @@
+                     React Application
+                            │
+                            ▼
+                     ┌─────────────┐
+                     │ AuthProvider│
+                     └──────┬──────┘
+                            │
+             ┌──────────────┴──────────────┐
+             │                             │
+             ▼                             ▼
+           user                       accessToken
+             │                             │
+             └──────────────┬──────────────┘
+                            │
+                            ▼
+                         useApi()
+                            │
+                     ┌──────┴──────┐
+                     │             │
+                     ▼             ▼
+               Request         Response
+              Interceptor     Interceptor
+                     │             │
+                     ▼             ▼
+              Add Bearer       Detect 401
+                Token              │
+                     │             ▼
+                     │        /auth/refresh
+                     │             │
+                     │             ▼
+                     │       New Access Token
+                     │             │
+                     │             ▼
+                     │       Update Context
+                     │             │
+                     │             ▼
+                     │       Retry Request
+                     │
+                     ▼
+                  Backend
+                     │
+            ┌────────┴────────┐
+            │                 │
+       Access Token       Refresh Token
+            │                 │
+            │                 │
+            ▼                 ▼
+        Authorization      HttpOnly
+           Header           Cookie
